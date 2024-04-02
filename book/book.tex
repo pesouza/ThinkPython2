@@ -32,7 +32,7 @@
 \title{Think Python}
 \author{Allen B. Downey}
 \newcommand{\thetitle}{Think Python: How to Think Like a Computer Scientist}
-\newcommand{\theversion}{2nd Edition, Version 2.2.20}
+\newcommand{\theversion}{2nd Edition, Version 2.4.0}
 \newcommand{\thedate}{}
 
 % these styles get translated in CSS for the HTML version
@@ -399,7 +399,7 @@ LaTeX source for this book into beautiful HTML.
 and an improvement in style in Chapter 1, and he initiated discussion
 on the technical aspects of interpreters.
 
-\item Benoit Girard sent in a
+\item Beno\^{i}t Girard sent in a
 correction to a humorous mistake in Section 5.6.
 
 \item Courtney Gleason and Katherine Smith wrote {\tt horsebet.py},
@@ -538,7 +538,7 @@ didn't match the text.
 \item Rob Black sent in a passel of corrections, including some
 changes for Python 2.2.
 
-\item Jean-Philippe Rey at Ecole Centrale
+\item Jean-Philippe Rey at \'{E}cole Centrale
 Paris sent a number of patches, including some updates for Python 2.2
 and other thoughtful improvements.
 
@@ -718,10 +718,14 @@ edition.
 
 \item William Murray corrected my definition of floor division.
 
+\item Per Starb{\"a}ck brought me up to date on universal newlines in Python 3. 
+
+\item Laurent Rosenfeld and Mihaela Rotaru translated this book into French.  Along the way, they sent many corrections and suggestions.
+
 % ENDCONTRIB
 
 In addition, people who spotted typos or made corrections include
-Czeslaw Czapla,
+Czeslaw Czapla, Dale Wilson, Francesco Carlo Cimini,
 Richard Fursa, Brian McGhie, Lokesh Kumar Makani, Matthew Shultz, Viet
 Le, Victor Simeone, Lars O.D. Christensen, Swarup Sahoo, Alix Etienne,
 Kuang He, Wei Huang, Karen Barber, and Eric Ransom.
@@ -1096,8 +1100,8 @@ there is no element with the abbreviation $Zz$.
 \index{structure}
 
 The second type of syntax rule pertains to the way tokens are
-combined.  The equation $3 += 3$ is illegal because even though $+$
-and $=$ are legal tokens, you can't have one right after the other.
+combined.  The equation $3 +/ 3$ is illegal because even though $+$
+and $/$ are legal tokens, you can't have one right after the other.
 Similarly, in a chemical formula the subscript comes after the element
 name, not before.
 
@@ -1331,8 +1335,8 @@ leave out one of the quotation marks, or both?
 {\tt -2}.  What happens if you put a plus sign before a number?
 What about {\tt 2++2}?
 
-\item In math notation, leading zeros are ok, as in {\tt 02}.
-What happens if you try this in Python?
+\item In math notation, leading zeros are ok, as in {\tt 09}.
+What happens if you try this in Python?  What about {\tt 011}?
 
 \item What happens if you have two values with no operator
 between them?
@@ -1387,7 +1391,7 @@ it a value:
 \begin{verbatim}
 >>> message = 'And now for something completely different'
 >>> n = 17
->>> pi = 3.141592653589793
+>>> pi = 3.1415926535897932
 \end{verbatim}
 %
 This example makes three assignments.  The first assigns a string
@@ -1548,9 +1552,11 @@ interpreter evaluates it and displays the result.  It turns out that a
 marathon is about 42 kilometers.
 
 But if you type the same code into a script and run it, you get no
-output at all.  In script mode an expression, all by itself, has no
-visible effect.  Python actually evaluates the expression, but it doesn't
-display the value unless you tell it to:
+output at all.  
+In script mode an expression, all by itself, has no
+visible effect.  Python evaluates the expression, but it doesn't
+display the result.
+To display the result, you need a {\tt print} statement like this:
 
 \begin{verbatim}
 miles = 26.2
@@ -1558,28 +1564,6 @@ print(miles * 1.61)
 \end{verbatim}
 
 This behavior can be confusing at first.
-
-A script usually contains a sequence of statements.  If there
-is more than one statement, the results appear one at a time
-as the statements execute.
-
-For example, the script
-
-\begin{verbatim}
-print(1)
-x = 2
-print(x)
-\end{verbatim}
-%
-produces the output
-
-\begin{verbatim}
-1
-2
-\end{verbatim}
-%
-The assignment statement produces no output.
-
 To check your understanding, type the following statements in the
 Python interpreter and see what they do:
 
@@ -1592,7 +1576,6 @@ x + 1
 Now put the same statements in a script and run it.  What
 is the output?  Modify the script by transforming each
 expression into a print statement and then run it again.
-
 
 
 \section{Order of operations}
@@ -1642,7 +1625,7 @@ In general, you can't perform mathematical operations on strings, even
 if the strings look like numbers, so the following are illegal:
 
 \begin{verbatim}
-'2'-'1'    'eggs'/'easy'    'third'*'a charm'
+'chinese'-'food'    'eggs'/'easy'    'third'*'a charm'
 \end{verbatim}
 %
 But there are two exceptions, {\tt +} and {\tt *}.
@@ -1978,7 +1961,7 @@ Finally, {\tt str} converts its argument to a string:
 
 \section{Math functions}
 \index{math function}
-\index{function, math}
+\index{function!math}
 
 Python has a math module that provides most of the familiar
 mathematical functions.  A {\bf module} is a file that contains a
@@ -2024,10 +2007,9 @@ which computes logarithms base {\tt e}.
 \index{sine function}
 \index{radian}
 \index{trigonometric function}
-\index{function, trigonometric}
+\index{function!trigonometric}
 
-The second example finds the sine of {\tt radians}.  The name of the
-variable is a hint that {\tt sin} and the other trigonometric
+The second example finds the sine of {\tt radians}.  The variable name {\tt radians} is a hint that {\tt sin} and the other trigonometric
 functions ({\tt cos}, {\tt tan}, etc.)  take arguments in radians. To
 convert from degrees to radians, divide by 180 and multiply by
 $\pi$:
@@ -2046,7 +2028,7 @@ of $\pi$, accurate to about 15 digits.
 
 If you know
 trigonometry, you can check the previous result by comparing it to
-the square root of two divided by two:
+the square root of two, divided by two:
 \index{sqrt function}
 \index{function!sqrt}
 
@@ -2472,8 +2454,8 @@ currently running is at the bottom.
 \section{Fruitful functions and void functions}
 \index{fruitful function}
 \index{void function}
-\index{function, fruitful}
-\index{function, void} 
+\index{function!fruitful}
+\index{function!void} 
 
 Some of the functions we have used, such as the math functions, return
 results; for lack of a better name, I call them {\bf fruitful
@@ -2540,7 +2522,7 @@ writing fruitful functions in a few chapters.
 
 
 \section{Why functions?}
-\index{function, reasons for}
+\index{function!reasons for}
 
 It may not be clear why it is worth the trouble to divide
 a program into functions.  There are several reasons:
@@ -2815,10 +2797,8 @@ print('+', end=' ')
 print('-')
 \end{verbatim}
 %
-The output of these statements is \verb"'+ -'".
-
-A {\tt print} statement with no argument ends the current line and
-goes to the next line.
+The output of these statements is \verb"'+ -'" on the same line.
+The output from the next print statement would begin on the next line.
 
 \item Write a function that draws a similar grid
 with four rows and four columns.
@@ -3010,7 +2990,7 @@ the starting direction.
 
 \section{Exercises}
 
-The following is a series of exercises using TurtleWorld.  They
+The following is a series of exercises using the {\tt turtle} module.  They
 are meant to be fun, but they have a point, too.  While you are
 working on them, think about what the point is.
 
@@ -3568,8 +3548,7 @@ returns a floating-point number:
 \end{verbatim}
 
 But we don't normally write hours with decimal points.  Floor
-division returns the integer number of hours, dropping the
-fraction part:
+division returns the integer number of hours, rounding down:
 
 \begin{verbatim}
 >>> minutes = 105
@@ -4396,7 +4375,7 @@ recurse(3, 0)
 
 The following exercises use the {\tt turtle} module, described in
 Chapter~\ref{turtlechap}:
-\index{TurtleWorld}
+\index{turtle module}
 
 \begin{exercise}
 
@@ -4580,7 +4559,7 @@ By the way, Python provides a built-in function called
 \index{abs function}
 \index{function!abs}
 
-As an exercise, write a {\tt compare} function
+As an exercise, write a {\tt compare} function that
 takes two values, {\tt x} and {\tt y}, and returns {\tt 1} if {\tt x > y},
 {\tt 0} if {\tt x == y}, and {\tt -1} if {\tt x < y}.
 \index{compare function}
@@ -4638,7 +4617,7 @@ To test the new function, call it with sample arguments:
 %
 I chose these values so that the horizontal distance is 3 and the
 vertical distance is 4; that way, the result is 5, the hypotenuse 
-of a 3-4-5 triangle. When testing a function, it is
+of a 3-4-5 right triangle. When testing a function, it is
 useful to know the right answer.
 \index{testing!knowing the answer}
 
@@ -5123,8 +5102,7 @@ Factorial is not defined for negative integers.
 None
 \end{verbatim}
 % 
-If we get past both checks, we know that $n$ is positive or
-zero, so we can prove that the recursion terminates.
+If we get past both checks, we know that $n$ is a non-negative integer, so we can prove that the recursion terminates.
 \index{guardian pattern}
 \index{pattern!guardian}
 
@@ -6857,25 +6835,24 @@ returns the result as a string: \index{readline method}
 
 \begin{verbatim}
 >>> fin.readline()
-'aa\r\n'
+'aa\n'
 \end{verbatim}
 %
 The first word in this particular list is ``aa'', which is a kind of
-lava.  The sequence \verb"\r\n" represents two whitespace characters,
-a carriage return and a newline, that separate this word from the
-next.
+lava.  The sequence \verb"\n" represents the newline character that 
+separates this word from the next.
 
 The file object keeps track of where it is in the file, so
 if you call {\tt readline} again, you get the next word:
 
 \begin{verbatim}
 >>> fin.readline()
-'aah\r\n'
+'aah\n'
 \end{verbatim}
 %
 The next word is ``aah'', which is a perfectly legitimate
 word, so stop looking at me like that.
-Or, if it's the whitespace that's bothering you,
+Or, if it's the newline character that's bothering you,
 we can get rid of it with the string method {\tt strip}:
 \index{strip method}
 \index{method!strip}
@@ -6928,8 +6905,8 @@ All right, I'll stop now.
 Write a function called \verb"has_no_e" that returns {\tt True} if
 the given word doesn't have the letter ``e'' in it.
 
-Modify your program from the previous section to print only the words
-that have no ``e'' and compute the percentage of the words in the list
+Write a program that reads {\tt words.txt} and prints only the words
+that have no ``e''.  Compute the percentage of words in the list
 that have no ``e''.
 \index{lipogram}
 
@@ -6943,8 +6920,8 @@ that takes a word and a string of forbidden letters, and
 that returns {\tt True} if the word doesn't use any of the forbidden
 letters.
 
-Modify your program to prompt the user to enter a string
-of forbidden letters and then print the number of words that
+Write a program that prompts the user to enter a string
+of forbidden letters and then prints the number of words that
 don't contain any of them.
 Can you find a combination of 5 forbidden letters that
 excludes the smallest number of words?
@@ -6958,7 +6935,7 @@ excludes the smallest number of words?
 Write a function named \verb"uses_only" that takes a word and a
 string of letters, and that returns {\tt True} if the word contains
 only letters in the list.  Can you make a sentence using only the
-letters {\tt acefhlo}?  Other than ``Hoe alfalfa?''
+letters {\tt acefhlo}?  Other than ``Hoe alfalfa''?
 
 \end{exercise}
 
@@ -7425,7 +7402,7 @@ used to be 123, is now 5.
 
 Figure~\ref{fig.liststate} shows 
 the state diagram for {\tt
-cheeses}, {\tt numbers} and {\tt empty}:
+cheeses}, {\tt numbers} and {\tt empty}.
 \index{state diagram}
 \index{diagram!state}
 
@@ -8477,7 +8454,7 @@ can read about at \url{http://en.wikipedia.org/wiki/Birthday_paradox}.
 \index{birthday paradox}
 
 If there are 23 students in your class, what are the chances
-that two of you have the same birthday?  You can estimate this
+that two of them have the same birthday?  You can estimate this
 probability by generating random samples of 23 birthdays
 and checking for matches.  Hint: you can generate random birthdays
 with the {\tt randint} function in the {\tt random} module.
@@ -8495,7 +8472,7 @@ solution from \url{http://thinkpython2.com/code/birthday.py}.
 
 \begin{exercise}
 \index{append method}
-\index{method append}
+\index{method!append}
 \index{list!concatenation}
 \index{concatenation!list}
 
@@ -8528,7 +8505,7 @@ through the words in order.
 
 Because the words are in alphabetical order, we can speed things up
 with a bisection search (also known as binary search), which is
-similar to what you do when you look a word up in the dictionary.  You
+similar to what you do when you look a word up in the dictionary (the book, not the data structure).  You
 start in the middle and check to see whether the word you are looking
 for comes before the word in the middle of the list.  If so, you
 search the first half of the list the same way.  Otherwise you search
@@ -8539,8 +8516,8 @@ word list has 113,809 words, it will take about 17 steps to
 find the word or conclude that it's not there.
 
 Write a function called \verb"in_bisect" that takes a sorted list
-and a target value and returns the index of the value
-in the list if it's there, or {\tt None} if it's not.
+and a target value and returns {\tt True} if the word is
+in the list and {\tt False} if it's not.
 \index{bisect module}
 \index{module!bisect}
 
@@ -8722,8 +8699,8 @@ dictionaries.  For lists, it searches the elements of the list in
 order, as in Section~\ref{find}.  As the list gets longer, the search
 time gets longer in direct proportion.
 
-For dictionaries, Python uses an
-algorithm called a {\bf hashtable} that has a remarkable property: the
+Python dictionaries use a data structure
+called a {\bf hashtable} that has a remarkable property: the
 {\tt in} operator takes about the same amount of time no matter how
 many items are in the dictionary.  I explain how that's possible
 in Section~\ref{hashtable}, but the explanation might not make
@@ -8818,7 +8795,7 @@ the default value.  For example:
 {'a': 1}
 >>> h.get('a', 0)
 1
->>> h.get('b', 0)
+>>> h.get('c', 0)
 0
 \end{verbatim}
 %
@@ -8938,8 +8915,7 @@ Python raises one: it prints a traceback and an error message.
 \index{optional argument}
 \index{argument!optional}
 
-The {\tt raise} statement can take a detailed error message as an
-optional argument.  For example:
+When you raise an exception, you can provide a detailed error message as an optional argument.  For example:
 
 \begin{verbatim}
 >>> raise LookupError('value does not appear in the dictionary')
@@ -9720,13 +9696,13 @@ the first element is assigned to {\tt uname}, the second to
 \index{tuple}
 \index{value!tuple}
 \index{return value!tuple}
-\index{function, tuple as return value}
+\index{function!tuple as return value}
 
 Strictly speaking, a function can only return one value, but
 if the value is a tuple, the effect is the same as returning
 multiple values.  For example, if you want to divide two integers
 and compute the quotient and remainder, it is inefficient to
-compute {\tt x/y} and then {\tt x\%y}.  It is better to compute
+compute {\tt x//y} and then {\tt x\%y}.  It is better to compute
 them both at the same time.
 \index{divmod}
 
@@ -9839,7 +9815,7 @@ But {\tt sum} does not.
 TypeError: sum expected at most 2 arguments, got 3
 \end{verbatim}
 %
-As an exercise, write a function called {\tt sumall} that takes any number
+As an exercise, write a function called \verb"sum_all" that takes any number
 of arguments and returns their sum.
 
 
@@ -9848,9 +9824,8 @@ of arguments and returns their sum.
 \index{function!zip}
 
 {\tt zip} is a built-in function that takes two or more sequences and
-returns a list of tuples where each tuple contains one
-element from each sequence.  The name of the function refers to
-a zipper, which joins and interleaves two rows of teeth.
+interleaves them.  The name of the function refers to
+a zipper, which interleaves two rows of teeth.
 
 This example zips a string and a list:
 
@@ -10219,12 +10194,10 @@ variables on the left.
 \index{tuple assignment}
 \index{assignment!tuple}
 
-\item[gather:] The operation of assembling a variable-length
-argument tuple.
+\item[gather:] An operation that collects multiple arguments into a tuple.
 \index{gather}
 
-\item[scatter:] The operation of treating a sequence as a list of
-arguments.
+\item[scatter:] An operation that makes a sequence behave like multiple arguments.
 \index{scatter}
 
 \item[zip object:] The result of calling a built-in function {\tt zip};
@@ -10297,7 +10270,6 @@ of anagrams first, followed by the second longest, and so on.
 \item In Scrabble a ``bingo'' is when you play all seven tiles in
 your rack, along with a letter on the board, to form an eight-letter
 word.  What collection of 8 letters forms the most possible bingos?
-Hint: there are seven.
 
 % (7, ['angriest', 'astringe', 'ganister', 'gantries', 'granites',
 % 'ingrates', 'rangiest'])
@@ -10425,7 +10397,7 @@ if we can make Python swear:
 \begin{verbatim}
 >>> import string
 >>> string.punctuation
-'!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~'
+'!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
 \end{verbatim}
 %
 Also, you might consider using the string methods {\tt strip},
@@ -10607,7 +10579,7 @@ hist = process_file('emma.txt')
 %
 This program reads {\tt emma.txt}, which contains the text of {\em
   Emma} by Jane Austen.
-\index{Austin, Jane}
+\index{Austen, Jane}
 
 \verb"process_file" loops through the lines of the file,
 passing them one at a time to \verb"process_line".  The histogram
@@ -10986,7 +10958,7 @@ Pike, {\em The Practice of Programming}, Addison-Wesley, 1999.
 
 \end{exercise}
 
-You should attempt this exercise before you go on; then you can can
+You should attempt this exercise before you go on; then you can
 download my solution from \url{http://thinkpython2.com/code/markov.py}.
 You will also need \url{http://thinkpython2.com/code/emma.txt}.
 
@@ -11548,15 +11520,16 @@ directory and its subdirectories.  You can download my solution from
 
 A lot of things can go wrong when you try to read and write
 files.  If you try to open a file that doesn't exist, you get an
-{\tt IOError}:
+{\tt FileNotFoundError}:
 \index{open function}
 \index{function!open}
-\index{exception!IOError}
-\index{IOError}
+\index{exception!FileNotFoundError}
+\index{FileNotFoundError}
 
 \begin{verbatim}
 >>> fin = open('bad_file')
-IOError: [Errno 2] No such file or directory: 'bad_file'
+FileNotFoundError: [Errno 2] No such file or directory: 'bad_file'
+
 \end{verbatim}
 %
 If you don't have permission to access a file:
@@ -11673,7 +11646,7 @@ loop works:
 \index{dictionary methods!dbm module}
 
 \begin{verbatim}
-for key in db:
+for key in db.keys():
     print(key, db[key])
 \end{verbatim}
 %
@@ -12230,9 +12203,9 @@ These elements are called {\bf attributes}.
 As a noun, ``AT-trib-ute'' is pronounced with emphasis on the first
 syllable, as opposed to ``a-TRIB-ute'', which is a verb.
 
-The following diagram shows the result of these assignments.
+Figure~\ref{fig.point} is a state diagram that shows the result of these assignments.
 A state diagram that shows an object and its attributes is
-called an {\bf object diagram}; see Figure~\ref{fig.point}.
+called an {\bf object diagram}.
 \index{state diagram}
 \index{diagram!state}
 \index{object diagram}
@@ -12686,7 +12659,7 @@ attributes, and the values of the attributes.
 
 Write a definition for a class named {\tt Circle} with attributes
 {\tt center} and {\tt radius}, where {\tt center} is a Point object
-and radius is a number.
+and {\tt radius} is a number.
 
 Instantiate a Circle object that represents a circle with its center
 at $(150, 100)$ and radius 75.
@@ -12701,8 +12674,8 @@ of the circle.
 
 Write a function named \verb"rect_circle_overlap" that takes a Circle
 and a Rectangle and returns True if any of the corners of the Rectangle fall
-inside the circle.  Or as a more challenging version, return True if
-any part of the Rectangle falls inside the circle.
+inside the Circle.  Or as a more challenging version, return True if
+any part of the Rectangle falls inside the Circle.
 
 Solution: \url{http://thinkpython2.com/code/Circle.py}.
 
@@ -12955,7 +12928,7 @@ have found all the errors.
 An alternative is {\bf designed development}, in which high-level
 insight into the problem can make the programming much easier.  In
 this case, the insight is that a Time object is really a three-digit
-number in base 60 (see \url{http://en.wikipedia.org/wiki/Sexagesimal}.)!  The
+number in base 60 (see \url{http://en.wikipedia.org/wiki/Sexagesimal}).  The
 {\tt second} attribute is the ``ones column'', the {\tt minute}
 attribute is the ``sixties column'', and the {\tt hour} attribute is
 the ``thirty-six hundreds column''.
@@ -13040,7 +13013,7 @@ for error).
 A Time object is well-formed if the values of {\tt minute} and {\tt
 second} are between 0 and 60 (including 0 but not 60) and if 
 {\tt hour} is positive.  {\tt hour} and {\tt minute} should be
-integral values, but we might allow {\tt second} to have a
+integer values, but we might allow {\tt second} to have a
 fraction part.
 \index{invariant}
 
@@ -13122,7 +13095,7 @@ majority of functions are pure.
 execution of a program.
 \index{invariant}
 
-\item[assert statement:] A statement that check a condition and raises
+\item[assert statement:] A statement that checks a condition and raises
 an exception if it fails.
 \index{assert statement}
 \index{statement!assert}
@@ -13172,7 +13145,7 @@ documentation at \url{http://docs.python.org/3/library/datetime.html}.
 
 \item For two people born on different days, there is a day when one
   is twice as old as the other.  That's their Double Day.  Write a
-  program that takes two birthdays and computes their Double Day.
+  program that takes two birth dates and computes their Double Day.
 
 \item For a little more challenge, write the more general version that
   computes the day when one person is $n$ times older than the other.
@@ -13912,11 +13885,6 @@ of an operand and invokes different functions for different types.
   than one type.  
 \index{polymorphism}
 
-\item[information hiding:] The principle that the interface provided 
-by an object should not depend on its implementation, in particular
-the representation of its attributes.
-\index{information hiding}
-
 \end{description}
 
 
@@ -14278,7 +14246,7 @@ and appends it to {\tt self.cards}.
 Here is a \verb"__str__" method for {\tt Deck}:
 
 \begin{verbatim}
-#inside class Deck:
+# inside class Deck:
 
     def __str__(self):
         res = []
@@ -14323,7 +14291,7 @@ The list method {\tt pop} provides a convenient way to do that:
 \index{method!pop}
 
 \begin{verbatim}
-#inside class Deck:
+# inside class Deck:
 
     def pop_card(self):
         return self.cards.pop()
@@ -14337,7 +14305,7 @@ dealing from the bottom of the deck.
 To add a card, we can use the list method {\tt append}:
 
 \begin{verbatim}
-#inside class Deck:
+# inside class Deck:
 
     def add_card(self, card):
         self.cards.append(card)
@@ -14463,7 +14431,7 @@ called \verb"move_cards":
 \index{encapsulation}
 
 \begin{verbatim}
-#inside class Deck:
+# inside class Deck:
 
     def move_cards(self, hand, num):
         for i in range(num):
@@ -14606,7 +14574,7 @@ Here's an example:
 \begin{verbatim}
 >>> hand = Hand()
 >>> find_defining_class(hand, 'shuffle')
-<class 'Card.Deck'>
+<class '__main__.Deck'>
 \end{verbatim}
 %
 So the {\tt shuffle} method for this Hand is the one in {\tt Deck}.
@@ -14725,7 +14693,7 @@ As an exercise, download my Markov code from
 \url{http://thinkpython2.com/code/markov.py}, and follow the steps
 described above to encapsulate the global variables as attributes of a
 new class called {\tt Markov}.  Solution:
-\url{http://thinkpython2.com/code/Markov.py} (note the capital M).
+\url{http://thinkpython2.com/code/markov2.py}.
 
 
 \section{Glossary}
@@ -15135,7 +15103,7 @@ through the values:
 %
 The generator object keeps track of where it is in the sequence,
 so the {\tt for} loop picks up where {\tt next} left off.  Once the
-generator is exhausted, it continues to raise {\tt StopException}:
+generator is exhausted, it continues to raise {\tt StopIteration}:
 
 \begin{verbatim}
 >>> next(g)
@@ -15296,7 +15264,7 @@ def uses_only(word, available):
     return set(word) <= set(available)
 \end{verbatim}
 %
-The \verb"<=" operator checks whether one set is a subset or another,
+The \verb"<=" operator checks whether one set is a subset of another,
 including the possibility that they are equal, which is true if all
 the letters in {\tt word} appear in {\tt available}.
 \index{subset}
@@ -15600,7 +15568,7 @@ def printall(*args, **kwargs):
 %
 You can call the keyword gathering parameter anything you want, but
 {\tt kwargs} is a common choice.  The result is a dictionary that maps
-keywords to values:
+from keywords to values:
 
 \begin{verbatim}
 >>> printall(1, 2.0, third='3')
@@ -15668,7 +15636,7 @@ create objects.
 
 \begin{exercise}
 
-The following is a function computes the binomial
+The following is a function that computes the binomial
 coefficient recursively.
 
 \begin{verbatim}
@@ -16462,7 +16430,7 @@ size      &   Algorithm A     & Algorithm B \\
 10        &   1 001           & 111         \\
 100       &   10 001          & 10 101         \\
 1 000     &   100 001         & 1 001 001         \\
-10 000    &   1 000 001       & $> 10^{10}$         \\
+10 000    &   1 000 001       & 100 010 001         \\
 \hline
 \end{tabular}
 
@@ -16559,7 +16527,7 @@ What about $n^3 + 1000000 n^2$?
   you start multiplying, remember that you only need the leading term.
 
 \item If $f$ is in $O(g)$, for some unspecified function $g$, what can
-  we say about $af+b$?
+  we say about $af+b$, where $a$ and $b$ are constants?
 
 \item If $f_1$ and $f_2$ are in $O(g)$, what can we say about $f_1 + f_2$?
 
@@ -16578,7 +16546,7 @@ analysis hard to swallow.  They have a point: sometimes the
 coefficients and the non-leading terms make a real difference.
 Sometimes the details of the hardware, the programming language, and
 the characteristics of the input make a big difference.  And for small
-problems asymptotic behavior is irrelevant.
+problems, order of growth is irrelevant.
 
 But if you keep those caveats in mind, algorithmic analysis is a
 useful tool.  At least for large problems, the ``better'' algorithm
@@ -16716,7 +16684,7 @@ the following questions:
   does Python use?  Are these algorithms stable?  You might have to
   Google around to find these answers.
 
-\item Many of the non-comparison sorts are linear, so why does does
+\item Many of the non-comparison sorts are linear, so why does
   Python use an $O(n \log n)$ comparison sort?
 
 \end{enumerate}
@@ -16928,16 +16896,14 @@ class HashMap:
         self.maps = new_maps
 \end{verbatim}
 
-Each {\tt HashMap} contains a {\tt BetterMap}; \verb"__init__" starts
-with just 2 LinearMaps and initializes {\tt num}, which keeps track of
-the number of items.
+\verb"__init__" creates a {\tt BetterMap} and initializes {\tt num}, which keeps track of the number of items.
 
 {\tt get} just dispatches to {\tt BetterMap}.  The real work happens
 in {\tt add}, which checks the number of items and the size of the
 {\tt BetterMap}: if they are equal, the average number of items per
 LinearMap is 1, so it calls {\tt resize}.
 
-{\tt resize} make a new {\tt BetterMap}, twice as big as the previous
+{\tt resize} makes a new {\tt BetterMap}, twice as big as the previous
 one, and then ``rehashes'' the items from the old map to the new.
 
 Rehashing is necessary because changing the number of LinearMaps
@@ -16986,7 +16952,7 @@ is $O(1)$.
 Figure~\ref{fig.hash} shows how this works graphically.  Each
 block represents a unit of work.  The columns show the total
 work for each add in order from left to right: the first two
-{\tt adds} cost 1 units, the third costs 3 units, etc.
+{\tt adds} cost 1 unit each, the third costs 3 units, etc.
 
 \begin{figure}
 \centerline{\includegraphics[width=5.5in]{figs/towers.pdf}}
@@ -17023,7 +16989,7 @@ to describe algorithms.
 \index{machine model}
 
 \item[worst case:] The input that makes a given algorithm run slowest (or
-require the most space.
+require the most space).
 \index{worst case}
 
 \item[leading term:] In a polynomial, the term with the highest exponent.
